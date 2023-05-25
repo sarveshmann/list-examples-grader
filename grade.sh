@@ -4,8 +4,9 @@ rm -rf student-submission
 rm -rf grading-area
 
 mkdir grading-area
+mkdir student-submission
 
-git clone $1 student-submission
+git clone $1 
 echo 'Finished cloning'
 
 
@@ -14,3 +15,12 @@ echo 'Finished cloning'
 
 # Then, add here code to compile and run, and do any post-processing of the
 # tests
+
+if [[ -f ./student-submission/ListExamples.java ]]
+then 
+    echo "Found ListExamples"
+    #java TestListExample $file
+else 
+    echo "ListExamples couldn't be found."
+    exit 1
+fi
