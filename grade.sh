@@ -4,11 +4,9 @@ rm -rf student-submission
 rm -rf grading-area
 
 mkdir grading-area
-mkdir student-submission
 
-git clone $1 
+git clone $1 student-submission
 echo 'Finished cloning'
-
 
 # Draw a picture/take notes on the directory structure that's set up after
 # getting to this point
@@ -19,7 +17,23 @@ echo 'Finished cloning'
 if [[ -f ./student-submission/ListExamples.java ]]
 then 
     echo "Found ListExamples"
-    #java TestListExample $file
+
+    cp ./student-submission/ListExamples.java ./grading-area
+    cp ./TestListExamples.java ./grading-area
+    cp -r ./lib ./grading-area 
+    
+    cd ./grading-area
+
+    javac -cp $CPATH *java
+    if [[ $? -eq 0 ]]
+    then
+        echo "Files compiled successfully."
+        java -cp $CPATH org.junit.runner.JUnitCore TestListExamples > result.txt
+        cat result.txt
+    else
+        echo "Files didn't compile."
+    fi
+    
 else 
     echo "ListExamples couldn't be found."
     exit 1
