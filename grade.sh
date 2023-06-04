@@ -32,7 +32,7 @@ then
         cat result.txt
     else
         echo "Files didn't compile."
-    fi
+    
     
 else 
     echo "ListExamples couldn't be found."
